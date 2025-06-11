@@ -14,36 +14,57 @@
   <style>
     body {
       margin: 0;
-      padding-top: env(safe-area-inset-top);
-      padding-left: env(safe-area-inset-left);
-      padding-right: env(safe-area-inset-right);
-      padding-bottom: env(safe-area-inset-bottom);
+      font-family: sans-serif;
+      background-color: #fff;
+      color: #000;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
-
-    body.light {
-      background-color: #ffffff;
-      color: #000000;
+    nav {
+      background: #2F3BA2;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      gap: 1rem;
     }
-
-    body.dark {
-      background-color: #000000;
-      color: #ffffff;
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    #conteudo {
+      padding: 1rem;
     }
   </style>
 </head>
 <body>
-  <h1>Olá, sou uma PWA!</h1>
-  <p>Você pode me instalar na tela inicial :)</p>
+  <nav>
+    <a href="#home">Início</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+  <div id="conteudo">Carregando...</div>
 
   <script>
-    // Detecta se o sistema está em modo escuro
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      document.body.classList.add('dark');
-    } else {
-      document.body.classList.add('light');
+    function carregarPagina(hash) {
+      const pagina = hash ? hash.replace('#', '') : 'home';
+      fetch(`paginas/${pagina}.html`)
+        .then(res => {
+          if (!res.ok) throw new Error('Página não encontrada');
+          return res.text();
+        })
+        .then(html => {
+          document.getElementById('conteudo').innerHTML = html;
+        })
+        .catch(err => {
+          document.getElementById('conteudo').innerHTML = '<h2>Página não encontrada</h2>';
+        });
     }
 
-    // Registro do service worker
+    window.addEventListener('hashchange', () => carregarPagina(location.hash));
+    window.addEventListener('load', () => carregarPagina(location.hash));
+
+    // Service worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker

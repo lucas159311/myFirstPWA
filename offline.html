@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Você está offline</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #fefefe;
+      padding: 3rem 1rem;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .spinner {
+      border: 6px solid #eee;
+      border-top: 6px solid #2F3BA2;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1.5rem auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    button {
+      background-color: #2F3BA2;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #1d2977;
+    }
+  </style>
+</head>
+<body>
+  <div class="spinner"></div>
+  <h1>Você está offline</h1>
+  <p>Essa página não está disponível no momento.</p>
+  <button onclick="tentarNovamente()">Tentar novamente</button>
+
+  <script>
+    function tentarNovamente() {
+      location.reload();
+    }
+
+    // Tenta recarregar automaticamente se a conexão voltar
+    window.addEventListener('online', () => {
+      location.reload();
+    });
+  </script>
+</body>
+</html>
