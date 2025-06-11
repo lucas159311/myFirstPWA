@@ -7,7 +7,19 @@
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="icons/icon-192.png" />
   <meta name="theme-color" content="#2F3BA2" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <base href="/myFirstPWA/">
+  <style>
+    body {
+      margin: 0;
+      padding-top: env(safe-area-inset-top);
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
+      padding-bottom: env(safe-area-inset-bottom);
+      background-color: #fff; /* ou a cor do fundo do seu app */
+    }
+
+  </style>
 </head>
 <body>
   <h1>Olá, sou uma PWA!</h1>
