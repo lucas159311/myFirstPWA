@@ -1,35 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="icon.png" type="image/x-icon">
-    
-    <!-- modify -->
-    <title>Title</title>
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#33ffcc"/>
-
-    <!-- /manifest -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PWA Simples</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <meta name="theme-color" content="#2F3BA2" />
 </head>
 <body>
-    
-    <h1>it works online.</h1>
+  <h1>Olá, sou uma PWA!</h1>
+  <p>Você pode me instalar na tela inicial :)</p>
 
-    <!-- load service worker -->
-    <script src="app.js"></script>
-    <!-- /load service worker -->
+  <script>
+    // Registro do service worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker
+          .register('/service-worker.js')
+          .then(reg => console.log('Service Worker registrado:', reg))
+          .catch(err => console.error('Erro no SW:', err));
+      });
+    }
+  </script>
 </body>
 </html>
-<script>
-    if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-            const swPath = `./service-worker.js`;
-            navigator.serviceWorker
-                .register(swPath)
-                .then((reg) => console.log("SW registrado: ", reg))
-                .catch((err) => console.error("SW erro:", err));
-        });
-    }
-</script>
