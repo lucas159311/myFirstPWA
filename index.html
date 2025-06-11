@@ -6,8 +6,10 @@
   <title>PWA Simples</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
   <meta name="theme-color" content="#2F3BA2" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <base href="/myFirstPWA/">
   <style>
     body {
@@ -16,9 +18,17 @@
       padding-left: env(safe-area-inset-left);
       padding-right: env(safe-area-inset-right);
       padding-bottom: env(safe-area-inset-bottom);
-      background-color: #fff; /* ou a cor do fundo do seu app */
     }
 
+    body.light {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    body.dark {
+      background-color: #000000;
+      color: #ffffff;
+    }
   </style>
 </head>
 <body>
@@ -26,11 +36,18 @@
   <p>Você pode me instalar na tela inicial :)</p>
 
   <script>
+    // Detecta se o sistema está em modo escuro
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.add('light');
+    }
+
     // Registro do service worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker
-          .register('/service-worker.js')
+          .register('/myFirstPWA/service-worker.js')
           .then(reg => console.log('Service Worker registrado:', reg))
           .catch(err => console.error('Erro no SW:', err));
       });
