@@ -7,6 +7,7 @@
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="icons/icon-192.png" />
   <meta name="theme-color" content="#2F3BA2" />
+  <base href="/myFirstPWA/">
 </head>
 <body>
   <h1>Olá, sou uma PWA!</h1>
@@ -17,7 +18,7 @@
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker
-          .register('./service-worker.js')
+          .register('/service-worker.js')
           .then(reg => console.log('Service Worker registrado:', reg))
           .catch(err => console.error('Erro no SW:', err));
       });

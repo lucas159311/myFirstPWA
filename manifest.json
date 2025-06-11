@@ -1,7 +1,7 @@
 {
   "name": "PWA Simples",
   "short_name": "PWA",
-  "start_url": "/",
+  "start_url": "/myFirstPWA/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2F3BA2",
